@@ -2513,20 +2513,57 @@ def ones_like[Shape: IntTuple](
     ...
 
 def full_like[Shape: IntTuple](
-    input: Tensor[Shape], fill_value: float
+    input: Tensor[Shape],
+    fill_value: float,
+    *,
+    dtype: Any = None,
+    layout: Any = None,
+    device: Any = None,
+    pin_memory: builtins.bool | None = False,
+    requires_grad: builtins.bool = False,
+    memory_format: Any = None,
 ) -> Tensor[Shape]:
     """Create tensor with same shape filled with value. Shape inference via generic fixture signature."""
     ...
 
-def empty_like[Shape: IntTuple](input: Tensor[Shape]) -> Tensor[Shape]:
+def empty_like[Shape: IntTuple](
+    input: Tensor[Shape],
+    *,
+    dtype: Any = None,
+    layout: Any = None,
+    device: Any = None,
+    pin_memory: builtins.bool | None = False,
+    requires_grad: builtins.bool = False,
+    memory_format: Any = None,
+) -> Tensor[Shape]:
     """Create uninitialized tensor with same shape. Shape inference via generic fixture signature."""
     ...
 
-def rand_like[Shape: IntTuple](input: Tensor[Shape]) -> Tensor[Shape]:
+def rand_like[Shape: IntTuple](
+    input: Tensor[Shape],
+    *,
+    generator: Any = None,
+    dtype: Any = None,
+    layout: Any = None,
+    device: Any = None,
+    pin_memory: builtins.bool | None = False,
+    requires_grad: builtins.bool = False,
+    memory_format: Any = None,
+) -> Tensor[Shape]:
     """Create random tensor [0,1) with same shape. Shape inference via generic fixture signature."""
     ...
 
-def randn_like[Shape: IntTuple](input: Tensor[Shape]) -> Tensor[Shape]:
+def randn_like[Shape: IntTuple](
+    input: Tensor[Shape],
+    *,
+    generator: Any = None,
+    dtype: Any = None,
+    layout: Any = None,
+    device: Any = None,
+    pin_memory: builtins.bool | None = False,
+    requires_grad: builtins.bool = False,
+    memory_format: Any = None,
+) -> Tensor[Shape]:
     """Create random normal tensor with same shape. Shape inference via generic fixture signature."""
     ...
 

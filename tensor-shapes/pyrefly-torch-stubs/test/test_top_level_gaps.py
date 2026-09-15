@@ -219,3 +219,10 @@ def test_tensor_float():
     assert_type(float(torch.zeros(())), float)
     assert_type(float(torch.zeros(1)), float)
     assert_type(float(torch.zeros(1, 1)), float)
+
+
+def test_like_factories_accept_creation_keywords(x: Tensor[[2, 3]]):
+    assert_type(torch.empty_like(x, dtype=torch.int64), Tensor[[2, 3]])
+    assert_type(torch.rand_like(x, dtype=torch.float64, device="cpu"), Tensor[[2, 3]])
+    assert_type(torch.randn_like(x, requires_grad=True), Tensor[[2, 3]])
+    assert_type(torch.full_like(x, 1.0, dtype=torch.float32), Tensor[[2, 3]])
