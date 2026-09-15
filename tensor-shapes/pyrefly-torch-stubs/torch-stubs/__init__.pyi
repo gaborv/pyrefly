@@ -3229,6 +3229,7 @@ def from_numpy(ndarray: Any) -> Tensor:
     """Create a CPU tensor that shares memory with a numpy array."""
     ...
 
+@overload
 def randint[Shape: IntTuple](
     low: int,
     high: int,
@@ -3242,6 +3243,40 @@ def randint[Shape: IntTuple](
     """Create a tensor of random integers. Shape is inferred from `size`."""
     ...
 
+@overload
+def randint[Shape: IntTuple](
+    high: int,
+    size: Shape,
+    *,
+    generator: Any = None,
+    dtype: Any = None,
+    device: Any = None,
+    requires_grad: bool = False,
+) -> Tensor[Shape]:
+    """Create a tensor of random integers in `[0, high)`. Shape is inferred from `size`."""
+    ...
+
+@overload
+def randint(
+    low: int,
+    high: int,
+    size: Sequence[int],
+    *,
+    generator: Any = None,
+    dtype: Any = None,
+    device: Any = None,
+    requires_grad: bool = False,
+) -> Tensor: ...
+@overload
+def randint(
+    high: int,
+    size: Sequence[int],
+    *,
+    generator: Any = None,
+    dtype: Any = None,
+    device: Any = None,
+    requires_grad: bool = False,
+) -> Tensor: ...
 def randperm(
     n: int,
     *,

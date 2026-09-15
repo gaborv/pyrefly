@@ -219,3 +219,10 @@ def test_tensor_float():
     assert_type(float(torch.zeros(())), float)
     assert_type(float(torch.zeros(1)), float)
     assert_type(float(torch.zeros(1, 1)), float)
+
+
+def test_randint_forms(n: int, size: list[int]):
+    assert_type(torch.randint(0, 10, (2, 3)), Tensor[[2, 3]])
+    assert_type(torch.randint(10, (4,)), Tensor[[4]])
+    assert_type(torch.randint(10, size), Tensor)
+    assert_type(torch.randint(0, 10, [n]), Tensor)
