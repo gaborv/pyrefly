@@ -1275,6 +1275,20 @@ def pad(
     """
     ...
 
+@overload
+def one_hot[Bs: IntTuple, C: IntVar](
+    tensor: Tensor[Bs], num_classes: _Int[C]
+) -> Tensor[[*Elements[Bs], C]]:
+    """One-hot encode integer indices, appending a `num_classes` dimension."""
+    ...
+
+@overload
+def one_hot[Bs: IntTuple](
+    tensor: Tensor[Bs], num_classes: int = -1
+) -> Tensor[[*Elements[Bs], int]]:
+    """One-hot encode integer indices; `-1` infers the class count from the data."""
+    ...
+
 # Softmax activation
 def softmax[Shape: IntTuple](
     input: Tensor[Shape], dim: int | None = None, dtype: int | None = None
