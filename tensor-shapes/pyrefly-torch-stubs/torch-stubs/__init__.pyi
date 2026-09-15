@@ -2064,6 +2064,14 @@ def empty[Shape: IntTuple](
     ...
 
 @overload
+def empty(
+    size: Sequence[builtins.int],
+    *,
+    dtype: Any = None,
+    device: Any = None,
+    requires_grad: builtins.bool = False,
+) -> Tensor: ...
+@overload
 def full[Shape: IntTuple](
     size: Shape,
     fill_value: builtins.float,
