@@ -51,6 +51,21 @@ class Categorical(Distribution):
         self, probs: Tensor | None = None, logits: Tensor | None = None
     ) -> None: ...
 
+class Multinomial(Distribution[IntTuple]):
+    """Multinomial distribution."""
+
+    # Gradual on purpose: `sample()` has the shape of `probs`, but `log_prob`
+    # drops its last dimension, which `Distribution[EventShape]` cannot express.
+
+    total_count: int
+    def __init__(
+        self,
+        total_count: int = 1,
+        probs: Tensor | None = None,
+        logits: Tensor | None = None,
+        validate_args: bool | None = None,
+    ) -> None: ...
+
 class Beta(Distribution):
     """Beta distribution."""
 
