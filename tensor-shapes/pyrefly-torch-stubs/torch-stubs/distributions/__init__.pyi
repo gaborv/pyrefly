@@ -13,7 +13,7 @@ Submodules re-exported to support original import patterns:
   pyd.transforms.Transform, pyd.constraints.real, etc.
 """
 
-from typing import Any
+from typing import Any, overload
 
 from shape_extensions import IntTuple
 from torch import Tensor
@@ -43,7 +43,29 @@ class Normal[EventShape: IntTuple](Distribution[EventShape]):
 
     loc: Tensor[EventShape]
     scale: Tensor[EventShape]
-    def __init__(self, loc: Tensor[EventShape], scale: Tensor[EventShape]) -> None: ...
+    @overload
+    def __init__(
+        self,
+        loc: Tensor[EventShape],
+        scale: Tensor[EventShape] | float,
+        validate_args: bool | None = None,
+    ) -> None: ...
+    @overload
+    def __init__(
+        self,
+        loc: float,
+        scale: Tensor[EventShape],
+        validate_args: bool | None = None,
+    ) -> None: ...
+    # With two Python scalars the batch shape is `()`, but `log_prob` above returns
+    # the batch shape rather than broadcasting it with `value`, so stay gradual.
+    @overload
+    def __init__(
+        self,
+        loc: float,
+        scale: float,
+        validate_args: bool | None = None,
+    ) -> None: ...
 
 class Categorical(Distribution):
     """Categorical distribution."""
